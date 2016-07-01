@@ -26,4 +26,5 @@ df.loc[df["Embarked"]=="S","Embarked"]=0
 df.loc[df["Embarked"]=="C","Embarked"]=1
 df.loc[df["Embarked"]=="Q","Embarked"]=2
 
-print df[:10]
+#dropped uneccesary variables
+df = df.drop(["PassengerId","Name","Ticket","Cabin"],axis=1)
