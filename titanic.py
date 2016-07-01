@@ -33,8 +33,7 @@ def preprocessing(file_name):
     df.loc[df["Embarked"]=="Q","Embarked"]=2
 
     #dropped uneccesary variables
-    df = df.drop(["Fare","Age","PassengerId","Name","Ticket","Cabin"],axis=1)
-    print df
+    df = df.drop(["PassengerId","Name","Ticket","Cabin"],axis=1)
     # print df
     df = np.array(df)
 
@@ -45,15 +44,15 @@ def preprocessing(file_name):
 
 df = preprocessing("train.csv")
 X_train = df[:,1:]
-Y_train = df[:,0]
-print X_train[0]
-# print Y_train
+Y_train = df[:,0].tolist()
+
+
 df = preprocessing("test.csv")
 X_test = df
-print X_test[152]
 
 
-titanic = DecisionTreeClassifier(max_depth=150)
+print Y_train[0]
+titanic = DecisionTreeClassifier(criterion="entropy")
 titanic.fit(X_train,Y_train)
 
 tree.export_graphviz(titanic,out_file='tree.dot')
